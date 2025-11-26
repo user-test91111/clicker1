@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,6 +27,17 @@ class ShopActivity : AppCompatActivity() {
         backButton.setOnClickListener{
             startActivity(intent)
         }
+
+        var count = 0
+        var multiple = 1
+        val costx2 = 100
+        val costx10 = 500
+        val costx100 = 1000
+        val costFarm1 = 75
+        val costFarm2 = 150
+        val costFarm3 = 650
+        val textCount = findViewById<TextView>(R.id.count)
+        textCount.setText(count.toString()) }
 
 //        val x2Button = findViewById<Button>(R.id.button)
 //        x2Button.setOnClickListener {
