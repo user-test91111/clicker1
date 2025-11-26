@@ -22,10 +22,15 @@ class ShopActivity : AppCompatActivity() {
             insets
         }
 
-        val backButton = findViewById<Button>(R.id.button2)
-        val intent = Intent(this, MainActivity::class.java)
+        val backButton = findViewById<Button>(R.id.button10)
         backButton.setOnClickListener{
-            startActivity(intent)
+            finish()
+        }
+
+        val achButton = findViewById<Button>(R.id.button11)
+        val intent2 = Intent(this, AchActivity::class.java)
+        achButton.setOnClickListener{
+            startActivity(intent2)
         }
 
         var count = 0
@@ -37,30 +42,30 @@ class ShopActivity : AppCompatActivity() {
         val costFarm2 = 150
         val costFarm3 = 650
         val textCount = findViewById<TextView>(R.id.count)
-        textCount.setText(count.toString()) }
+        textCount.setText(count.toString())
 
-//        val x2Button = findViewById<Button>(R.id.button)
-//        x2Button.setOnClickListener {
-//            if (count >= costx2){
-//                count -= costx2
-//                multiple = 2
-//            }
-//        }
-//
-//        val x10Button = findViewById<Button>(R.id.button5)
-//        x10Button.setOnClickListener {
-//            if (count >= costx10){
-//                count -= costx10
-//                multiple = 10
-//            }
-//        }
-//
-//        val x100Button = findViewById<Button>(R.id.button6)
-//        x100Button.setOnClickListener {
-//            if (count >= costx100){
-//                count -= costx100
-//                multiple = 100
-//            }
-//        }
+        val x2Button = findViewById<Button>(R.id.button)
+        x2Button.setOnClickListener {
+            if (count >= costx2){
+                count -= costx2
+                multiple = 2
+            }
+        }
+
+        val x10Button = findViewById<Button>(R.id.button5)
+        x10Button.setOnClickListener {
+            if (count >= costx10){
+                count -= costx10
+                multiple = 10
+            }
+        }
+
+        val x100Button = findViewById<Button>(R.id.button6)
+        x100Button.setOnClickListener {
+            if (count >= costx100){
+                count -= costx100
+                multiple = 100
+            }
+        }
     }
 }

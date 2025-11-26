@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clicker1">
         <activity
+            android:name=".AchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShopActivity"
             android:exported="false" />
         <activity
