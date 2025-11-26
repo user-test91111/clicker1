@@ -1,6 +1,7 @@
 package com.example.clicker1
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -10,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,29 +34,11 @@ class MainActivity : AppCompatActivity() {
             count += Plus(multiple)
             textCount.setText(count.toString()) }
 
-        val x2Button = findViewById<Button>(R.id.button2)
-        x2Button.setOnClickListener {
-            if (count >= costx2){
-                count -= costx2
-                multiple = 2
+        val shopButton = findViewById<Button>(R.id.shopButton)
+        val intent = Intent(this, ShopActivity::class.java)
+                shopButton.setOnClickListener{
+                startActivity(intent)
             }
-        }
-
-        val x10Button = findViewById<Button>(R.id.button3)
-        x10Button.setOnClickListener {
-            if (count >= costx10){
-                count -= costx10
-                multiple = 10
-            }
-        }
-
-        val x100Button = findViewById<Button>(R.id.button4)
-        x100Button.setOnClickListener {
-            if (count >= costx100){
-                count -= costx100
-                multiple = 100
-            }
-        }
 
     }
     fun Plus(multiple: Int): Int{
