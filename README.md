@@ -1,4 +1,4 @@
-<body "style: text-align: center">
-  <h1>ЭТО КЛИКЕР</h1>
+<body>
+  <h1  "style: text-align: center">ЭТО КЛИКЕР</h1>
 <h3>зеленый</h2>
 </body>
