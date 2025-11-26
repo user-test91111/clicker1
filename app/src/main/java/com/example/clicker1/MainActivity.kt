@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch")
+    @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,9 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         var count = 0
         var multiple = 1
-        val costx2 = 100
-        val costx10 = 500
-        val costx100 = 1000
         val textCount = findViewById<TextView>(R.id.clicks)
         val clickButton = findViewById<Button>(R.id.clickbutton)
         clickButton.setOnClickListener {
@@ -39,8 +36,14 @@ class MainActivity : AppCompatActivity() {
                 shopButton.setOnClickListener{
                 startActivity(intent)
             }
+        val achButton = findViewById<Button>(R.id.button3)
+        val intent2 = Intent(this, AchActivity::class.java)
+        achButton.setOnClickListener{
+            startActivity(intent2)
+        }
 
     }
+
     fun Plus(multiple: Int): Int{
         return 1*multiple
     }
