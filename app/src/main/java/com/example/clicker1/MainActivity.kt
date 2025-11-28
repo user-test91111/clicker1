@@ -12,6 +12,9 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch", "SuspiciousIndentation")
+    var count = 0
+    var multiple = 1
+    val bundle = intent.extras
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,9 +25,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val bundle = intent.extras
+        if (bundle?.getInt("count")!=null) {
+            count = bundle.getInt("count")
+        }
+        if (bundle?.getInt("multiple")!=null) {
+            multiple = bundle.getInt("multiple")
+        }
 
-        var count = 0
-        var multiple = 1
         val textCount = findViewById<TextView>(R.id.clicks)
         val clickButton = findViewById<Button>(R.id.clickbutton)
         clickButton.setOnClickListener {
@@ -34,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         val shopButton = findViewById<Button>(R.id.shopButton)
         val intent = Intent(this, ShopActivity::class.java)
                 shopButton.setOnClickListener{
+                    intent.putExtra("count", count)
+                    intent.putExtra("multiple", multiple)
                 startActivity(intent)
             }
         val achButton = findViewById<Button>(R.id.button3)
@@ -44,6 +54,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (bundle?.getInt("count")!=null) {
+            count = bundle.getInt("count")
+        }
+        if (bundle?.getInt("multiple")!=null) {
+            multiple = bundle.getInt("multiple")
+        }
+
+    }
     fun Plus(multiple: Int): Int{
         return 1*multiple
     }
