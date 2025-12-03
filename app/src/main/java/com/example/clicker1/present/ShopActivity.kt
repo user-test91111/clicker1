@@ -1,18 +1,25 @@
-package com.example.clicker1
+package com.example.clicker1.present
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.clicker1.R
+import com.example.clicker1.data.MainViewDataModel
+import com.example.clicker1.domain.MainViewModelDomain
 
 class ShopActivity : AppCompatActivity() {
+
+    private var factory = MainViewModelDomain()
     @SuppressLint("MissingInflatedId")
-    var multiple = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,14 +30,9 @@ class ShopActivity : AppCompatActivity() {
             insets
         }
 
-        var count = 0
-        val bundle = intent.extras
-        if (bundle?.getInt("count")!=null) {
-            count = bundle.getInt("count")
-        }
-        if (bundle?.getInt("multiple")!=null) {
-            multiple = bundle.getInt("multiple")
-        }
+        val mainVM = ViewModelProvider(this, factory).get(MainViewDataModel::class.java)
+        var count = mainVM.count
+        var multiple = mainVM.multiple
         val costx2 = 10
         val costx10 = 50
         val costx100 = 100
@@ -39,7 +41,8 @@ class ShopActivity : AppCompatActivity() {
         val costFarm3 = 650
 
         val textCount = findViewById<TextView>(R.id.count)
-        textCount.setText(count.toString())
+        Log.v("F", mainVM.count.toString())
+        textCount.setText(mainVM.count.toString())
 
         val x2Button = findViewById<Button>(R.id.button6)
         x2Button.setOnClickListener {
@@ -92,8 +95,6 @@ class ShopActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.button10)
         val intent = Intent(this, MainActivity::class.java)
         backButton.setOnClickListener{
-//            intent.putExtra("count", count)
-//            intent.putExtra("multiple", multiple)
 //            startActivity(intent)
             finish()
         }

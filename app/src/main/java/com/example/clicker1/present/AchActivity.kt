@@ -1,4 +1,4 @@
-package com.example.clicker1
+package com.example.clicker1.present
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.clicker1.R
 
 class AchActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

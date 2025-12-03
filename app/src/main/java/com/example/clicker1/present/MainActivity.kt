@@ -1,20 +1,25 @@
-package com.example.clicker1
+package com.example.clicker1.present
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.clicker1.R
+import com.example.clicker1.data.MainViewDataModel
+import com.example.clicker1.domain.MainViewModelDomain
 
 class MainActivity : AppCompatActivity() {
+
+    private var factory = MainViewModelDomain()
+
     @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch", "SuspiciousIndentation")
-    var count = 0
-    var multiple = 1
-    val bundle = intent.extras
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,26 +29,21 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val bundle = intent.extras
-        if (bundle?.getInt("count")!=null) {
-            count = bundle.getInt("count")
-        }
-        if (bundle?.getInt("multiple")!=null) {
-            multiple = bundle.getInt("multiple")
-        }
-
+        val mainVM = ViewModelProvider(this, factory).get(MainViewDataModel::class.java)
+        var count = mainVM.count
+        var multiple = mainVM.multiple
         val textCount = findViewById<TextView>(R.id.clicks)
         val clickButton = findViewById<Button>(R.id.clickbutton)
         clickButton.setOnClickListener {
-            count += Plus(multiple)
-            textCount.setText(count.toString()) }
+            count += mainVM.Plus(multiple)
+            textCount.setText(count.toString())
+
+        }
 
         val shopButton = findViewById<Button>(R.id.shopButton)
         val intent = Intent(this, ShopActivity::class.java)
-                shopButton.setOnClickListener{
-                    intent.putExtra("count", count)
-                    intent.putExtra("multiple", multiple)
+        shopButton.setOnClickListener{
+            mainVM.count = count
                 startActivity(intent)
             }
         val achButton = findViewById<Button>(R.id.button3)
@@ -52,19 +52,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent2)
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (bundle?.getInt("count")!=null) {
-            count = bundle.getInt("count")
-        }
-        if (bundle?.getInt("multiple")!=null) {
-            multiple = bundle.getInt("multiple")
-        }
-
-    }
-    fun Plus(multiple: Int): Int{
-        return 1*multiple
     }
 }
