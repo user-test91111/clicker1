@@ -7,17 +7,18 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.clicker1.R
 import com.example.clicker1.data.MainViewDataModel
-import com.example.clicker1.domain.MainViewModelDomain
+import kotlin.getValue
 
 class ShopActivity : AppCompatActivity() {
 
-    private var factory = MainViewModelDomain()
+    private val mainVM: MainViewDataModel by viewModels()
     @SuppressLint("MissingInflatedId")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +31,9 @@ class ShopActivity : AppCompatActivity() {
             insets
         }
 
-        val mainVM = ViewModelProvider(this, factory).get(MainViewDataModel::class.java)
-        var count = mainVM.count
-        var multiple = mainVM.multiple
+
+//        var count = mainVM.count
+//        var multiple = mainVM.multiple
         val costx2 = 10
         val costx10 = 50
         val costx100 = 100
@@ -42,55 +43,57 @@ class ShopActivity : AppCompatActivity() {
 
         val textCount = findViewById<TextView>(R.id.count)
         Log.v("F", mainVM.count.toString())
-        textCount.setText(mainVM.count.toString())
-
-        val x2Button = findViewById<Button>(R.id.button6)
-        x2Button.setOnClickListener {
-            if (count >= costx2){
-                count -= costx2
-                multiple = 2
-            }
+        mainVM.count.observe(this) {
+                count -> textCount.text = count.toString()
         }
 
-        val x10Button = findViewById<Button>(R.id.button5)
-        x10Button.setOnClickListener {
-            if (count >= costx10){
-                count -= costx10
-                multiple = 10
-            }
-        }
-
-        val x100Button = findViewById<Button>(R.id.button)
-        x100Button.setOnClickListener {
-            if (count >= costx100){
-                count -= costx100
-                multiple = 100
-            }
-        }
-
-        val farm1Button = findViewById<Button>(R.id.button7)
-        farm1Button.setOnClickListener {
-            if (count >= costFarm1){
-                count -= costFarm1
-                multiple = 2
-            }
-        }
-
-        val farm2Button = findViewById<Button>(R.id.button8)
-        farm2Button.setOnClickListener {
-            if (count >= costFarm2){
-                count -= costFarm2
-                multiple = 10
-            }
-        }
-
-        val farm3Button = findViewById<Button>(R.id.button9)
-        farm3Button.setOnClickListener {
-            if (count >= costFarm3){
-                count -= costFarm3
-                multiple = 100
-            }
-        }
+//        val x2Button = findViewById<Button>(R.id.button6)
+//        x2Button.setOnClickListener {
+//            if (count >= costx2){
+//                count -= costx2
+//                multiple = 2
+//            }
+//        }
+//
+//        val x10Button = findViewById<Button>(R.id.button5)
+//        x10Button.setOnClickListener {
+//            if (count >= costx10){
+//                count -= costx10
+//                multiple = 10
+//            }
+//        }
+//
+//        val x100Button = findViewById<Button>(R.id.button)
+//        x100Button.setOnClickListener {
+//            if (count >= costx100){
+//                count -= costx100
+//                multiple = 100
+//            }
+//        }
+//
+//        val farm1Button = findViewById<Button>(R.id.button7)
+//        farm1Button.setOnClickListener {
+//            if (count >= costFarm1){
+//                count -= costFarm1
+//                multiple = 2
+//            }
+//        }
+//
+//        val farm2Button = findViewById<Button>(R.id.button8)
+//        farm2Button.setOnClickListener {
+//            if (count >= costFarm2){
+//                count -= costFarm2
+//                multiple = 10
+//            }
+//        }
+//
+//        val farm3Button = findViewById<Button>(R.id.button9)
+//        farm3Button.setOnClickListener {
+//            if (count >= costFarm3){
+//                count -= costFarm3
+//                multiple = 100
+//            }
+//        }
 
         val backButton = findViewById<Button>(R.id.button10)
         val intent = Intent(this, MainActivity::class.java)

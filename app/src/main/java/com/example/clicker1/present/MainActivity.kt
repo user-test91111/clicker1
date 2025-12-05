@@ -7,17 +7,19 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.clicker1.R
 import com.example.clicker1.data.MainViewDataModel
-import com.example.clicker1.domain.MainViewModelDomain
+
 
 class MainActivity : AppCompatActivity() {
 
-    private var factory = MainViewModelDomain()
+    private val mainVM: MainViewDataModel by viewModels()
 
     @SuppressLint("MissingInflatedId", "UnsafeIntentLaunch", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,21 +31,21 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val mainVM = ViewModelProvider(this, factory).get(MainViewDataModel::class.java)
-        var count = mainVM.count
-        var multiple = mainVM.multiple
+
+//        var multiple = mainVM.multiple
         val textCount = findViewById<TextView>(R.id.clicks)
         val clickButton = findViewById<Button>(R.id.clickbutton)
         clickButton.setOnClickListener {
-            count += mainVM.Plus(multiple)
-            textCount.setText(count.toString())
+            mainVM.plus()
+        }
 
+        mainVM.count.observe(this) {
+                count -> textCount.text = count.toString()
         }
 
         val shopButton = findViewById<Button>(R.id.shopButton)
         val intent = Intent(this, ShopActivity::class.java)
         shopButton.setOnClickListener{
-            mainVM.count = count
                 startActivity(intent)
             }
         val achButton = findViewById<Button>(R.id.button3)
