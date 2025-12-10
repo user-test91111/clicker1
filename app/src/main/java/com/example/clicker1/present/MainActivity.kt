@@ -39,20 +39,25 @@ class MainActivity : AppCompatActivity() {
             mainVM.plus()
         }
 
-        mainVM.count.observe(this) {
-                count -> textCount.text = count.toString()
+        mainVM.count.observe(this) { count ->
+            textCount.text = count.toString()
         }
 
         val shopButton = findViewById<Button>(R.id.shopButton)
         val intent = Intent(this, ShopActivity::class.java)
-        shopButton.setOnClickListener{
-                startActivity(intent)
-            }
-        val achButton = findViewById<Button>(R.id.button3)
-        val intent2 = Intent(this, AchActivity::class.java)
-        achButton.setOnClickListener{
-            startActivity(intent2)
+        shopButton.setOnClickListener {
+            startActivity(intent)
         }
 
+        val resetButton = findViewById<Button>(R.id.reset)
+        resetButton.setOnClickListener {
+            mainVM.reset()
+        }
+
+        val achivementsButton = findViewById<Button>(R.id.button3)
+        val intent2 = Intent(this, AchActivity::class.java)
+        achivementsButton.setOnClickListener {
+            startActivity(intent2)
+        }
     }
 }
