@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Clicker1">
         <activity
-            android:name=".AchActivity"
+            android:name=".present.AchActivity"
             android:exported="false" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".present.ShopActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".present.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

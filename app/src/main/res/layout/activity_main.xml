@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".present.MainActivity">
 
     <Button
         android:id="@+id/shopButton"
@@ -17,6 +17,18 @@
         android:text="Shop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="131dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="136dp"
+        android:backgroundTint="#208827"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clickbutton" />
 
     <Button
         android:id="@+id/button3"

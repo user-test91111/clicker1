@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopActivity">
+    tools:context=".present.ShopActivity">
 
     <Button
         android:id="@+id/button9"
@@ -114,7 +114,7 @@
         android:layout_marginStart="188dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#208827"
-        android:text="100"
+        android:text="50"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -197,7 +197,7 @@
         android:layout_marginStart="172dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#208827"
-        android:text="500"
+        android:text="200"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
 

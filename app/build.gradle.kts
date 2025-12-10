@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
