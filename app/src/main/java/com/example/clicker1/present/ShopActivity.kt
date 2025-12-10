@@ -90,4 +90,5 @@ class ShopActivity : AppCompatActivity() {
             startActivity(intent2)
         }
     }
+
 }
