@@ -52,6 +52,7 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
         }
     }
 
+
     fun reset(){
         _count.value = 0
         _multiple.value = 1
