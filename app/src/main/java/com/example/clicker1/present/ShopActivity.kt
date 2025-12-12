@@ -40,17 +40,28 @@ class ShopActivity : AppCompatActivity() {
 
         val x2Button = findViewById<Button>(R.id.button6)
         x2Button.setOnClickListener {
-            mainVM.buy( 50, 2)
+            if (!mainVM.usedX2.value!!) {
+                mainVM.buy(5, 2)
+                mainVM.usedX2.value = true
+                mainVM.save_u()
+            }
         }
 
         val x10Button = findViewById<Button>(R.id.button5)
         x10Button.setOnClickListener {
-            mainVM.buy(200, 10)
+            if (!mainVM.usedX10.value!!) {
+                mainVM.buy(20, 10)
+                mainVM.usedX10.value = true
+
+            }
         }
 
         val x100Button = findViewById<Button>(R.id.button)
         x100Button.setOnClickListener {
-            mainVM.buy(1000, 100)
+            if (!mainVM.usedX100.value!!) {
+                mainVM.buy(100, 100)
+                mainVM.usedX100.value = true
+            }
         }
 
 //        val farm1Button = findViewById<Button>(R.id.button7)
@@ -89,6 +100,7 @@ class ShopActivity : AppCompatActivity() {
         achButton.setOnClickListener {
             startActivity(intent2)
         }
+
     }
 
 }
