@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         val shopButton = findViewById<Button>(R.id.shopButton)
         val intent = Intent(this, ShopActivity::class.java)
         shopButton.setOnClickListener {
+            mainVM.save()
             startActivity(intent)
         }
 

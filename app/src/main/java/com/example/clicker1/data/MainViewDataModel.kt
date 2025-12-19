@@ -16,7 +16,10 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
     private var _count = MutableLiveData<Int>()
     private var _multiple = MutableLiveData<Int>()
 
+    var count: LiveData<Int> = _count
     private var farm = MutableLiveData<Int>()
+
+    var bought = MutableLiveData<Int>()
     val usedX2 = MutableLiveData<Boolean>()
     var usedX10 = MutableLiveData<Boolean>()
     var usedX100 = MutableLiveData<Boolean>()
@@ -25,13 +28,10 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
     var farm2 = MutableLiveData<Boolean>()
     var farm3 = MutableLiveData<Boolean>()
 
-    val time = android.os.Handler(Looper.getMainLooper())
+    var time = android.os.Handler(Looper.getMainLooper())
     val runnable = object: Runnable {
         override fun run() {
-            _count.value += farm.value!!
-            preferences.edit {
-                putInt("count", _count.value!!)
-            }
+            _count.value = (_count.value ?:0) + farm.value!!
             time.postDelayed(this,1000)
         }
     }
@@ -57,11 +57,16 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
         val saved_f3 = preferences.getBoolean("farm3", false)
         farm3.value = saved_f3
 
+        val saved_bought = preferences.getInt("bought", 0)
+        bought.value = saved_bought
+
         val saved_farm = preferences.getInt("farm", 0)
 
         farm.value = saved_farm
         time.post(runnable)
+
     }
+
 
     fun buy(cost:Int, mod:Int, isUsed: MutableLiveData<Boolean>): Boolean{
         if (!isUsed.value!!){
@@ -69,9 +74,11 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
                 _count.value = (_count.value ?:0) - cost
                 _multiple.value = mod
                 isUsed.value = true
+                bought.value = (bought.value ?: 0) + 1
                 preferences.edit {
                     putInt("multiple", _multiple.value!!)
                     putInt("count", _count.value!!)
+                    putInt("bought", bought.value!!)
                     putBoolean("usedx2", usedX2.value!!)
                     putBoolean("usedx10", usedX10.value!!)
                     putBoolean("usedx100", usedX100.value!!)
@@ -81,21 +88,6 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
         }
         return false
     }
-
-    fun save_u(){
-        preferences.edit { putBoolean("usedx2", usedX2.value!!)}
-        preferences.edit { putBoolean("usedx10", usedX10.value!!)}
-        preferences.edit { putBoolean("usedx100", usedX100.value!!)}
-    }
-//    fun buyFarm(cost:Int, type:Int){
-//        if ((_count.value ?: 0) >= cost) {
-//            _count.value = (_count.value ?:0) - cost
-//            var farmType= type
-//            preferences.edit {
-//                putInt("count", _count.value!!)
-//            }
-//        }
-//    }
 
     fun plus() {
         val m = _multiple.value ?: 1
@@ -122,6 +114,7 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
         preferences.edit {
             putInt("multiple", _multiple.value!!)
             putInt("count", _count.value!!)
+            putInt("bought", bought.value!!)
 
             putBoolean("usedx2", usedX2.value!!)
             putBoolean("usedx10", usedX10.value!!)
@@ -152,5 +145,20 @@ class MainViewDataModel(application: Application) : AndroidViewModel(application
         }
         return false
     }
-    var count: LiveData<Int> = _count
+
+    fun save(){
+        preferences.edit{
+            putInt("multiple", _multiple.value!!)
+            putInt("count", _count.value!!)
+
+            putBoolean("usedx2", usedX2.value!!)
+            putBoolean("usedx10", usedX10.value!!)
+            putBoolean("usedx100", usedX100.value!!)
+
+            putInt("farm", farm.value!!)
+            putBoolean("farm1", farm1.value!!)
+            putBoolean("farm2", farm2.value!!)
+            putBoolean("farm3", farm3.value!!)
+        }
+    }
 }
